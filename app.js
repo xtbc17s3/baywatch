@@ -1,5 +1,5 @@
 const app = {
-  init: function(selectors) {
+  init(selectors) {
     this.max = 0
     this.list = document.querySelector(selectors.listSelector)
 
@@ -8,13 +8,13 @@ const app = {
       .addEventListener('submit', this.handleSubmit.bind(this))
   },
 
-  renderListItem: function(flick) {
+  renderListItem(flick) {
     const item = document.createElement('li')
     item.textContent = flick.name
     return item
   },
 
-  handleSubmit: function(ev) {
+  handleSubmit(ev) {
     ev.preventDefault()
     const f = ev.target
     const flick = {
