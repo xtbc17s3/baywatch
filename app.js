@@ -12,6 +12,7 @@ const app = {
       )
   },
 
+  // takes the flick and makes the list item out of it
   renderListItem(flick) {
     const item = document.createElement('li')
     item.textContent = flick.name
