@@ -13,6 +13,13 @@ const app = {
       )
   },
 
+  favFlick(flick, ev) {
+    const listItem = ev.target.closest('.flick')
+    listItem.classList.add('fav')
+
+    flick.fav = true
+  },
+
   removeFlick(flick, ev) {
     // remove from the DOM
     const listItem = ev.target.closest('.flick')
@@ -37,6 +44,13 @@ const app = {
         'click', 
         this.removeFlick.bind(this, flick)
       )
+
+    item
+      .querySelector('button.fav')
+      .addEventListener(
+        'click', 
+        this.favFlick.bind(this, flick)
+      )
     
     return item
   },
@@ -47,6 +61,7 @@ const app = {
     const flick = {
       id: this.max + 1,
       name: f.flickName.value,
+      fav: false,
     }
 
     this.flicks.unshift(flick)
