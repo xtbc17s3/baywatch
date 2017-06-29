@@ -44,6 +44,10 @@ h1 small {
   display: none;
 }
 
+.flick.fav {
+  background-color: #62d9dd;
+}
+
 .flick-name {
   margin: 0 0.75rem;
 }
