@@ -11,6 +11,7 @@ const app = {
 
   renderListItem(flick) {
     const item = document.createElement('li')
+    item.dataset.id = flick.id
     item.textContent = flick.name
     return item
   },
