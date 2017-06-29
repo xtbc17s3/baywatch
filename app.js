@@ -27,6 +27,8 @@ const app = {
       name: f.flickName.value,
     }
 
+    this.flicks.push(flick)
+
     const listItem = this.renderListItem(flick)
     this.list.appendChild(listItem)
 
