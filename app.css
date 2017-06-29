@@ -36,3 +36,7 @@ h1 small {
 .list-container {
   background-color: whitesmoke;
 }
+
+.template {
+  display: none;
+}
