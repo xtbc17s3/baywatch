@@ -10,7 +10,7 @@ body {
 }
 h1 {
   float: right;
-  margin-top: 0.75rem;
+  margin-top: 1.4rem;
   font-family: 'Bungee', cursive;
   text-shadow: 0 0 10px #fff,
                0 0 20px #fff,
@@ -30,8 +30,8 @@ h1 small {
   position: absolute;
 }
 .banner img {
-  height: 100px;
+  height: 7rem;
 }
 .list-container {
-  background-color: whitesmoke;`
+  background-color: whitesmoke;
 }
