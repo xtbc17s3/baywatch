@@ -40,6 +40,10 @@ h1 small {
   margin-bottom: 0;
 }
 
+.template {
+  display: none;
+}
+
 .flick-name {
   margin: 0 0.75rem;
 }
