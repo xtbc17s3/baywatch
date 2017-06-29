@@ -31,6 +31,7 @@ const app = {
     this.list.appendChild(listItem)
 
     this.max ++
+    f.reset()
   },
 }
 
