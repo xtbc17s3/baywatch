@@ -10,6 +10,30 @@ const app = {
       .addEventListener('submit', this.handleSubmit.bind(this))
   },
 
+  toggleEditable(flick, listItem, ev) {
+    const nameField = listItem.querySelector('.flick-name')
+    const btn = listItem.querySelector('button.edit')
+    const icon = btn.querySelector('i.fa')
+
+    if (nameField.isContentEditable) {
+      // make it no longer editable
+      nameField.contentEditable = false
+      icon.classList.remove('fa-check')
+      icon.classList.add('fa-pencil')
+      btn.classList.remove('success')
+
+      // save changes
+      flick.name = nameField.textContent
+    } else {
+      // make it editable
+      nameField.contentEditable = true
+      nameField.focus()
+      icon.classList.remove('fa-pencil')
+      icon.classList.add('fa-check')
+      btn.classList.add('success')
+    }
+  },
+
   moveDown(flick) {
     const i = this.flicks.indexOf(flick)
 
@@ -80,6 +104,13 @@ const app = {
       .addEventListener(
         'click',
         this.moveDown.bind(this, flick)
+      )
+
+    item
+      .querySelector('button.edit')
+      .addEventListener(
+        'click',
+        this.toggleEditable.bind(this, flick, item)
       )
 
     return item
