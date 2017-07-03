@@ -10,6 +10,10 @@ const app = {
       .addEventListener('submit', this.handleSubmit.bind(this))
   },
 
+  save() {
+    localStorage.setItem('flicks', JSON.stringify(this.flicks))
+  },
+
   saveOnEnter(flick, listItem, ev) {
     if (ev.key === 'Enter') {
       this.toggleEditable(flick, listItem)
@@ -30,6 +34,7 @@ const app = {
 
       // save changes
       flick.name = nameField.textContent
+      this.save()
     } else {
       // make it editable
       nameField.contentEditable = true
@@ -58,12 +63,16 @@ const app = {
       const previousFlick = this.flicks[i - 1]
       this.flicks[i - 1] = flick
       this.flicks[i] = previousFlick
+
+      this.save()
     }
   },
 
   favFlick(flick, ev) {
     const listItem = ev.target.closest('.flick')
     flick.fav = listItem.classList.toggle('fav')
+
+    this.save()
   },
 
   removeFlick(flick, ev) {
@@ -74,6 +83,8 @@ const app = {
     // remove from the array
     const i = this.flicks.indexOf(flick)
     this.flicks.splice(i, 1)
+
+    this.save()
   },
 
   renderListItem(flick) {
@@ -142,6 +153,7 @@ const app = {
 
     this.max ++
     f.reset()
+    this.save()
   },
 }
 
