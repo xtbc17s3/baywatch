@@ -10,6 +10,14 @@ const app = {
       .addEventListener('submit', this.handleSubmit.bind(this))
   },
 
+  moveDown(flick) {
+    const i = this.flicks.indexOf(flick)
+
+    if (i < this.flicks.length - 1) {
+      this.moveUp(this.flicks[i + 1])
+    }
+  },
+
   moveUp(flick) {
     const listItem = this.list.querySelector(`[data-id="${flick.id}"]`)
     const i = this.flicks.indexOf(flick)
@@ -65,6 +73,13 @@ const app = {
       .addEventListener(
         'click',
         this.moveUp.bind(this, flick)
+      )
+
+    item
+      .querySelector('button.move-down')
+      .addEventListener(
+        'click',
+        this.moveDown.bind(this, flick)
       )
 
     return item
