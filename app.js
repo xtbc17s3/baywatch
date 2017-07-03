@@ -10,6 +10,12 @@ const app = {
       .addEventListener('submit', this.handleSubmit.bind(this))
   },
 
+  saveOnEnter(flick, listItem, ev) {
+    if (ev.key === 'Enter') {
+      this.toggleEditable(flick, listItem)
+    }
+  },
+
   toggleEditable(flick, listItem, ev) {
     const nameField = listItem.querySelector('.flick-name')
     const btn = listItem.querySelector('button.edit')
@@ -74,9 +80,13 @@ const app = {
     const item = this.template.cloneNode(true)
     item.classList.remove('template')
     item.dataset.id = flick.id
-    item
-      .querySelector('.flick-name')
-      .textContent = flick.name
+
+    const nameSpan = item.querySelector('.flick-name')
+    nameSpan.textContent = flick.name
+    nameSpan.addEventListener(
+      'keypress',
+      this.saveOnEnter.bind(this, flick, item)
+    )
 
     item
       .querySelector('button.remove')
