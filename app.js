@@ -1,5 +1,5 @@
-const app = {
-  init(selectors) {
+class App {
+  constructor(selectors) {
     this.flicks = []
     this.max = 0
     this.list = document.querySelector(selectors.listSelector)
@@ -10,7 +10,7 @@ const app = {
       .addEventListener('submit', this.handleSubmit.bind(this))
 
     this.load()
-  },
+  }
 
   load() {
     // load the JSON from localStorage
@@ -24,17 +24,17 @@ const app = {
         .reverse()
         .map(this.addFlick.bind(this))
     }
-  },
+  }
 
   save() {
     localStorage.setItem('flicks', JSON.stringify(this.flicks))
-  },
+  }
 
   saveOnEnter(flick, listItem, ev) {
     if (ev.key === 'Enter') {
       this.toggleEditable(flick, listItem)
     }
-  },
+  }
 
   toggleEditable(flick, listItem, ev) {
     const nameField = listItem.querySelector('.flick-name')
@@ -59,7 +59,7 @@ const app = {
       icon.classList.add('fa-check')
       btn.classList.add('success')
     }
-  },
+  }
 
   moveDown(flick) {
     const i = this.flicks.indexOf(flick)
@@ -67,7 +67,7 @@ const app = {
     if (i < this.flicks.length - 1) {
       this.moveUp(this.flicks[i + 1])
     }
-  },
+  }
 
   moveUp(flick) {
     const listItem = this.list.querySelector(`[data-id="${flick.id}"]`)
@@ -82,14 +82,14 @@ const app = {
 
       this.save()
     }
-  },
+  }
 
   favFlick(flick, ev) {
     const listItem = ev.target.closest('.flick')
     flick.fav = listItem.classList.toggle('fav')
 
     this.save()
-  },
+  }
 
   removeFlick(flick, ev) {
     // remove from the DOM
@@ -101,7 +101,7 @@ const app = {
     this.flicks.splice(i, 1)
 
     this.save()
-  },
+  }
 
   renderListItem(flick) {
     const item = this.template.cloneNode(true)
@@ -155,7 +155,7 @@ const app = {
       )
 
     return item
-  },
+  }
 
   addFlick(flick) {
     this.flicks.unshift(flick)
@@ -167,7 +167,7 @@ const app = {
       this.max = flick.id
     }
     this.save()
-  },
+  }
 
   handleSubmit(ev) {
     ev.preventDefault()
@@ -181,10 +181,10 @@ const app = {
     this.addFlick(flick)
 
     f.reset()
-  },
+  }
 }
 
-app.init({
+const app = new App({
   formSelector: 'form#flick-form',
   listSelector: '#flick-list',
   templateSelector: '.flick.template'
