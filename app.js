@@ -163,6 +163,9 @@ const app = {
     const listItem = this.renderListItem(flick)
     this.list.insertBefore(listItem, this.list.firstElementChild)
 
+    if (flick.id > this.max) {
+      this.max = flick.id
+    }
     this.save()
   },
 
@@ -177,7 +180,6 @@ const app = {
 
     this.addFlick(flick)
 
-    this.max ++
     f.reset()
   },
 }
