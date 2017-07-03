@@ -8,6 +8,22 @@ const app = {
     document
       .querySelector(selectors.formSelector)
       .addEventListener('submit', this.handleSubmit.bind(this))
+
+    this.load()
+  },
+
+  load() {
+    // load the JSON from localStorage
+    const flicksJSON = localStorage.getItem('flicks')
+
+    // convert the JSON back into an array
+    const flicksArray = JSON.parse(flicksJSON)
+
+    if (flicksArray) {
+      flicksArray
+        .reverse()
+        .map(this.addFlick.bind(this))
+    }
   },
 
   save() {
@@ -92,6 +108,10 @@ const app = {
     item.classList.remove('template')
     item.dataset.id = flick.id
 
+    if (flick.fav) {
+      item.classList.add('fav')
+    }
+
     const nameSpan = item.querySelector('.flick-name')
     nameSpan.textContent = flick.name
     nameSpan.addEventListener(
@@ -137,6 +157,15 @@ const app = {
     return item
   },
 
+  addFlick(flick) {
+    this.flicks.unshift(flick)
+
+    const listItem = this.renderListItem(flick)
+    this.list.insertBefore(listItem, this.list.firstElementChild)
+
+    this.save()
+  },
+
   handleSubmit(ev) {
     ev.preventDefault()
     const f = ev.target
@@ -146,14 +175,10 @@ const app = {
       fav: false,
     }
 
-    this.flicks.unshift(flick)
-
-    const listItem = this.renderListItem(flick)
-    this.list.insertBefore(listItem, this.list.firstElementChild)
+    this.addFlick(flick)
 
     this.max ++
     f.reset()
-    this.save()
   },
 }
 
